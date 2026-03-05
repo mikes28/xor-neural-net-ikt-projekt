@@ -1,0 +1,87 @@
+## TODO – IKT XOR neurális háló projekt
+
+### 1. Git / repo
+
+- [x] GitHub repó létrehozása (`xor-neural-net-ikt-projekt`)
+- [x] `LICENSE` fájl hozzáadása (MIT, saját név + 2026)
+- [x] Kész `README.md` bemásolása és szükség szerint igazítása
+- [x] Csapattárs hozzáadása collaborator-ként
+
+### 2. Környezet
+
+- [ ] Projekt mappában virtuális környezet létrehozása: `python -m venv venv`
+- [ ] Venv aktiválása (Windows / Linux szerint)
+- [ ] `numpy` és `matplotlib` telepítése: `pip install numpy matplotlib`
+- [ ] (Opcionális) `pip freeze > requirements.txt`
+
+### 3. Alap neurális háló (main.py)
+
+- [ ] XOR adatok létrehozása (X: 4×2, y: 4×1)
+- [ ] Háló struktúra eldöntése (2 bemenet, 2 rejtett neuron, 1 kimenet)
+- [ ] Súlyok és biasok inicializálása (random súlyok, 0-s biasok)
+- [ ] `sigmoid(x)` aktivációs függvény megírása
+- [ ] `sigmoid_derivative(x)` megírása (x már sigmoid-kimenet)
+- [ ] Tanulási paraméterek beállítása (`learning_rate`, `epochs`, `errors` lista)
+
+### 4. Tanulási ciklus (forward + backprop)
+
+- [ ] `for epoch in range(epochs):` ciklus létrehozása
+- [ ] Forward pass:
+  - [ ] `hidden_input = X @ weights_input_hidden + bias_hidden`
+  - [ ] `hidden_output = sigmoid(hidden_input)`
+  - [ ] `final_input = hidden_output @ weights_hidden_output + bias_output`
+  - [ ] `final_output = sigmoid(final_input)`
+- [ ] Hiba számítása:
+  - [ ] `error = y - final_output`
+  - [ ] átlagos hiba kiszámítása és eltárolása az `errors` listába
+- [ ] Backpropagation:
+  - [ ] kimeneti gradiens: `d_output = error * sigmoid_derivative(final_output)`
+  - [ ] rejtett gradiens: `d_hidden = d_output @ weights_hidden_output.T * sigmoid_derivative(hidden_output)`
+- [ ] Súlyok frissítése:
+  - [ ] `weights_hidden_output += hidden_output.T @ d_output * learning_rate`
+  - [ ] `weights_input_hidden += X.T @ d_hidden * learning_rate`
+- [ ] Biasok frissítése:
+  - [ ] `bias_output += d_output.sum(axis=0, keepdims=True) * learning_rate`
+  - [ ] `bias_hidden += d_hidden.sum(axis=0, keepdims=True) * learning_rate`
+
+### 5. Eredmények kiíratása
+
+- [ ] Tanulás után újra forward pass a 4 XOR bemenetre
+- [ ] A négy kimenet kiíratása kerekítve (pl. 2 tizedes + 0/1-re kerekítve)
+- [ ] Ellenőrzés, hogy közel [0, 1, 1, 0] az eredmény
+
+### 6. Vizualizáció (matplotlib)
+
+- [ ] Hiba alakulásának kirajzolása (`errors` lista vs. epoch)
+  - [ ] Tengelyek, cím, rács beállítása
+- [ ] Rejtett neuronok aktivációinak kirajzolása a 4 mintára
+  - [ ] Pontok 1–4 x-tengelyen, y-n a két neuron aktivációja külön színnel
+  - [ ] Jelmagyarázat (legend), cím, tengelyfeliratok
+
+### 7. Interaktivitás
+
+- [ ] A tanulás után kérj be a felhasználótól egy `x1` és `x2` értéket (`input()`)
+- [ ] Ezekből készíts egy 1×2-es bemeneti vektort
+- [ ] Futtasd át a hálón (forward) csak erre az egy mintára
+- [ ] Írd ki a háló kimenetét (valós szám + kerekítve 0/1-re)
+
+### 8. Kód tisztítás és kommentek
+
+- [ ] Magyar kommentek hozzáadása a fő blokkok elé (adatok, súlyok, forward, hiba, backprop, vizualizáció)
+- [ ] Felesleges debug `print`-ek törlése
+- [ ] Érthető változónevek ellenőrzése
+
+### 9. Prezentáció / órai bemutató
+
+- [ ] Rövid magyarázat az XOR-ról és arról, miért nem elég egy egyenes elválasztás
+- [ ] Neurális háló rajz: 2 bemenet → 2 rejtett neuron → 1 kimenet
+- [ ] A tanulási folyamat elmagyarázása (hiba, súlyfrissítés)
+- [ ] Hiba-grafikon és neuronaktivációk bemutatása
+- [ ] Élő demo: `python main.py`, kimenetek, + saját `x1`, `x2` bemenet kipróbálása
+
+### 10. Végső Git lépések
+
+- [ ] Minden fontos fájl commit-olása (`main.py`, `README.md`, `LICENSE`, esetleg `requirements.txt`)
+- [ ] Branch push-olása GitHubra
+- [ ] Pull request létrehozása a saját repódban a feature branch → `main` között
+- [ ] Merge a `main` branch-be
