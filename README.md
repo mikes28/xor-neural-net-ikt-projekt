@@ -9,6 +9,8 @@ Célja, hogy bemutassa, hogyan tanul egy modell: hogyan csökken a hiba, és hog
 - numpy
 - matplotlib
 
+- thee
+
 A csomagok telepítése:
 
 ```bash
